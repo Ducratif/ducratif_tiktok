@@ -19,6 +19,8 @@
 </p>
 
 ---
+[![Docs](https://img.shields.io/badge/📖%20Documentation-Visiter%20la%20doc-ff0050?style=for-the-badge&logo=tiktok)](https://ducratif.github.io/ducratif_tiktok)
+---
 
 ## 🧩 Features
 - Lecture **temps réel** du **chat**, **likes**, **gifts**, **follows** TikTok.
