@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dev Logs • Ducratif TikTok Bridge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0d0d0d;
+      color: #fff;
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(90deg, #ff0050, #00f2ea);
+      color: white;
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    nav button {
+      background: none;
+      border: 2px solid #ff0050;
+      color: #fff;
+      padding: 10px 20px;
+      margin: 0 10px;
+      cursor: pointer;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav button.active,
+    nav button:hover {
+      background: #ff0050;
+      color: #fff;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+    .logs {
+      display: none;
+    }
+    .logs.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card {
+      background: #1a1a1a;
+      border-left: 4px solid #ff0050;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .card h3 {
+      margin: 0;
+      color: #00f2ea;
+    }
+    .badge {
+      background: #ff0050;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 0.8em;
+      margin-left: 10px;
+    }
+    ul {
+      margin: 10px 0 0 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>🚀 Dev Logs - Ducratif TikTok Bridge</header>
+  <div style="text-align:center; margin:20px;">
+  <a href="index.html" 
+     style="display:inline-block; background:#00f2ea; color:#000; font-weight:bold; 
+            padding:12px 25px; border-radius:30px; text-decoration:none; 
+            transition:0.3s;">
+    ⬅️ Retour à l'accueil
+  </a>
+</div>
+
+
+  <nav>
+    <button id="btn-bridge" class="active">Bridge Node V1.0.0</button>
+    <button id="btn-fivem">Script FiveM V1.0.0</button>
+  </nav>
+
+  <div class="container">
+    <!-- Logs Bridge -->
+    <section id="logs-bridge" class="logs active">
+      <div class="card">
+        <h3>v1.0.0 <span class="badge">Initial</span></h3>
+        <ul>
+          <li>Connexion live TikTok → serveur FiveM</li>
+          <li>Envoi des actions : gifts, likes, follow, chat</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Logs FiveM -->
+    <section id="logs-fivem" class="logs">
+
+        <div style="text-align:center; margin:20px;">
+            <a href="https://ducratif.tebex.io/package/tiktok" 
+               style="display:inline-block; background:#38f200; color:#000; font-weight:bold; 
+                      padding:12px 25px; border-radius:30px; text-decoration:none; 
+                      transition:0.3s;">
+              Premier Téléchargement
+            </a>
+            <a href="https://portal.cfx.re/assets/granted-assets" 
+               style="display:inline-block; background:#00f2ea; color:#000; font-weight:bold; 
+                      padding:12px 25px; border-radius:30px; text-decoration:none; 
+                      transition:0.3s;">
+              Télécharger une nouvelle Version
+            </a>
+        </div>
+      <!--<div class="card">
+        <h3>v1.0.1</h3>
+        <ul>
+          <li>???</li>
+          <li>?? <code>???</code></li>
+        </ul>
+      </div>-->
+      <div class="card">
+        <h3>v1.0.0 <span class="badge">Initial</span></h3>
+        <ul>
+            <li>Sorti officiel de la V1.0.0</li>
+          <li>Actions TikTok → FiveM : feux d’artifice, drop véhicules, confettis ect....</li>
+          <li>Intégration ESX Legacy</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const btnBridge = document.getElementById('btn-bridge');
+    const btnFiveM = document.getElementById('btn-fivem');
+    const logsBridge = document.getElementById('logs-bridge');
+    const logsFiveM = document.getElementById('logs-fivem');
+
+    btnBridge.onclick = () => {
+      btnBridge.classList.add('active');
+      btnFiveM.classList.remove('active');
+      logsBridge.classList.add('active');
+      logsFiveM.classList.remove('active');
+    };
+
+    btnFiveM.onclick = () => {
+      btnFiveM.classList.add('active');
+      btnBridge.classList.remove('active');
+      logsFiveM.classList.add('active');
+      logsBridge.classList.remove('active');
+    };
+  </script>
+</body>
+</html>
