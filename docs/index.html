@@ -3,39 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ducratif TikTok Bridge</title>
+  <title>Bridge TikTok → FiveM | Ducratif</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
       background: #000;
       color: #fff;
-      text-align: center;
+      line-height: 1.6;
     }
     header {
       background: linear-gradient(90deg, #ff0050, #00f2ea);
-      padding: 20px;
+      padding: 25px;
+      text-align: center;
       font-size: 2rem;
       font-weight: bold;
       text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #fff;
     }
     h2 {
-      color: #ff0050;
-      margin-top: 40px;
-    }
-    code {
-      background: #111;
-      padding: 4px 8px;
-      border-radius: 5px;
       color: #00f2ea;
+      margin-top: 40px;
+      text-align: center;
+    }
+    h3 {
+      color: #ff0050;
+      margin-top: 20px;
     }
     .block {
       margin: 20px auto;
-      max-width: 800px;
+      max-width: 900px;
       background: #111;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 0, 80, 0.4);
+    }
+    code {
+      background: #222;
+      padding: 2px 6px;
+      border-radius: 5px;
+      color: #00f2ea;
+      font-family: monospace;
+    }
+    pre {
+      background: #111;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      border: 1px solid #333;
+    }
+    ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    footer {
+      margin-top: 50px;
+      text-align: center;
       padding: 20px;
-      border-radius: 10px;
-      text-align: left;
+      font-size: 0.9rem;
+      color: #aaa;
+      background: #111;
+      border-top: 1px solid #222;
+    }
+    footer a {
+      color: #00f2ea;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -49,23 +85,100 @@
     <ul>
       <li>Node.js >= 18</li>
       <li><code>npm install</code></li>
+      <li>FiveM ESX Legacy</li>
+      <li>Votre License CFX</li>
     </ul>
   </div>
 
-  <h2>⚙️ Configuration Node</h2>
+  <h2>⚙️ Configuration Node Bridge</h2>
   <div class="block">
-    <p>Copiez <code>.env.example</code> en <code>.env</code> puis configurez vos identifiants.</p>
+    <ol>
+      <li>Copiez <code>.env.example</code> en <code>.env</code></li>
+      <li>Configurez :
+        <ul>
+          <li><b>TIKTOK_USERNAME</b> : votre pseudo TikTok</li>
+          <li><b>FIVEM_BASE</b> : URL de votre serveur FiveM (ex: <code>http://127.0.0.1:30120/ducratif_tiktok</code>)</li>
+          <li><b>SHARED_TOKEN</b> : le même token que <code>Config.SharedSecret</code></li>
+          <li><b>LIKE_STEP</b> : nombre de likes avant récompenses globales</li>
+          <li><b>FAN_STEP</b> : toutes les X likes → spawn d’un ped fan</li>
+        </ul>
+      </li>
+    </ol>
   </div>
 
-  <h2>🔥 Commandes TikTok</h2>
+  <h2>🔥 Lancement</h2>
+  <div class="block">
+    <pre><code>npm i
+node index.js</code></pre>
+    <p>⚠️ Assurez-vous d’être <b>en live TikTok</b> + <b>serveur FiveM lancé</b>.</p>
+  </div>
+
+  <h2>🎮 Configuration FiveM</h2>
+  <div class="block">
+    <p>Fichier : <code>config.lua</code></p>
+    <ul>
+      <li><b>Config.SharedSecret</b> = même token que côté Node</li>
+      <li><b>Config.StreamerIdentifiers</b> = vos IDs (license/steam/cfx)</li>
+      <li><b>Config.Debug</b> = true/false</li>
+      <li><b>Config.EnableTtDrop / TtIds / TtHealStreamer</b> = activer/désactiver les commandes</li>
+      <li><b>Config.EjectOnlyDriver</b> = true = eject uniquement conducteur</li>
+      <li><b>Config.VehicleDropModels</b> = véhicules dropables</li>
+      <li><b>Config.FanPedModels</b> = modèles de peds</li>
+    </ul>
+    <p>Ajoutez dans votre <code>server.cfg</code> :</p>
+    <pre><code>ensure ducratif_tiktok</code></pre>
+  </div>
+
+  <h2>💬 Commandes Chat TikTok</h2>
   <div class="block">
     <p><code>!confetti</code> → Confettis</p>
     <p><code>!boost</code> → Boost à pied</p>
     <p><code>!boostv</code> → Boost véhicule</p>
-    <p><code>!heal</code> → Heal zone</p>
+    <p><code>!heal</code> → Heal autour du streamer</p>
     <p><code>!healme</code> → Heal le streamer</p>
     <p><code>!revive</code> → Revive le streamer</p>
-    <p><code>!eject</code> → Eject du véhicule</p>
+    <p><code>!eject</code> → Éjecte le streamer du véhicule</p>
   </div>
+
+  <h2>⭐ Paliers de likes</h2>
+  <div class="block">
+    <p>✔️ Tous les X likes → <b>argent + confettis</b></p>
+    <p>✔️ Tous les X likes → <b>spawn d’un ped fan avec le pseudo TikTok</b></p>
+  </div>
+
+  <h2>🧪 Tester avec PowerShell</h2>
+  <div class="block">
+    <h3>🎆 Feu d’artifice</h3>
+    <pre><code>$uri = 'http://127.0.0.1:30120/ducratif_tiktok/hook'
+$headers = @{ 'X-Token' = 'TON_TOKEN_ICI' }
+$body = '{"action":"FIREWORKS","meta":{"viewer":"test","label":"debug"}}'
+Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType 'application/json' -Body $body</code></pre>
+
+    <h3>🚗 Véhicule</h3>
+    <pre><code>$bodyObj = @{
+  action = 'VEHICLE_DROP'
+  meta   = @{ viewer = 'test'; label = 'debug' }
+}
+$bodyJson = ($bodyObj | ConvertTo-Json -Compress)
+Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType 'application/json' -Body $bodyJson</code></pre>
+
+    <h3>⚡ Boost</h3>
+    <pre><code>$body='{"action":"SPEED_BOOST_PED","meta":{"viewer":"test"}}'
+Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType 'application/json' -Body $body</code></pre>
+
+    <h3>🧍 Spawn Ped Fan</h3>
+    <pre><code>$body = '{"action":"FAN_PED","meta":{"viewer":"test","label":"test"}}'
+Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType 'application/json' -Body $body</code></pre>
+  </div>
+
+  <footer>
+    <p>Made with ❤️ by <b>Ducratif</b></p>
+    <p>
+      <a href="https://tiktok.com/@ducratifoff" target="_blank">TikTok</a> |
+      <a href="https://github.com/Ducratif" target="_blank">GitHub</a> |
+      <a href="https://youtube.com/@DucraDev" target="_blank">YouTube</a> |
+      <a href="https://discord.gg/kpD8pQBBWm" target="_blank">Discord</a>
+    </p>
+  </footer>
 </body>
 </html>
